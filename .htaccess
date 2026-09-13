@@ -1,0 +1,11 @@
+# HAMSI — configuration Apache (WAMP / XAMPP)
+Options -Indexes
+DirectoryIndex index.php
+
+# Encodage par défaut
+AddDefaultCharset UTF-8
+
+# Bloquer l'accès aux fichiers sensibles
+<FilesMatch "(^\.|\.(sql|md|log|ini|bak|sh)$)">
+    Require all denied
+</FilesMatch>

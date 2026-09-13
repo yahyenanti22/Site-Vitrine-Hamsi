@@ -1,0 +1,24 @@
+# Dossier d'upload : aucun script ne doit pouvoir s'y exécuter
+Options -Indexes -ExecCGI
+
+# Désactiver le moteur PHP (mod_php 7 et 8)
+<IfModule mod_php7.c>
+    php_flag engine off
+</IfModule>
+<IfModule mod_php.c>
+    php_flag engine off
+</IfModule>
+
+# Retirer tout gestionnaire de script
+RemoveHandler .php .phtml .php3 .php4 .php5 .php7 .php8 .phar .pl .py .cgi .sh
+RemoveType .php .phtml .php3 .php4 .php5 .php7 .php8 .phar
+
+# Refuser tout fichier qui n'est pas une image autorisée
+<FilesMatch "(?i)\.(php\d*|phtml|phar|pl|py|cgi|sh|html?|js|svg)$">
+    Require all denied
+</FilesMatch>
+
+# Empêcher le navigateur de deviner le type des fichiers
+<IfModule mod_headers.c>
+    Header set X-Content-Type-Options "nosniff"
+</IfModule>
